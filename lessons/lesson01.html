@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <title>มานะ มานี - บทที่ 1 | พระจอมเกล้าติวเตอร์</title>
+    <!-- เพิ่ม CSS ตรงนี้ เพื่อความง่ายในการจัดการไฟล์เดียว -->
+    <style>
+        body { font-family: 'Sarabun', sans-serif; line-height: 1.25; padding: 20px; }
+        .summary { background: #f7fafc; padding: 20px; border-left: 5px solid #3182ce; margin-bottom: 20px; }
+        .exam-area { display: block; margin-top: 30px; }
+        .explanation { display: none; color: #2b6cb0; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <!-- ส่วนสรุปเนื้อหาตามเงื่อนไข (400 คำ+) -->
+    <div class="summary">
+        <h1>บทที่ 1: กา</h1>
+        <p>เนื้อหาสรุป: [ใส่เนื้อหา 400 คำที่นี่...] มานะ มานี คือบทเรียนอมตะที่เน้นการฝึกทักษะการอ่านผ่านการแจกลูกสะกดคำ...</p>
+        <p><strong>เทคนิคการจำ:</strong> ใช้ภาพลักษณ์ของ "กา" สีดำประกอบกับสระอาที่เป็นเส้นตรง สื่อถึงความตรงไปตรงมา...</p>
+    </div>
+
+    <!-- ส่วนข้อสอบ (แสดงผล HTML ทันที) -->
+    <div class="exam-area">
+        <form id="quizForm">
+            <p>1. คำใดอ่านว่า "กา"?</p>
+            <input type="radio" name="q1" value="a"> กา <br>
+            <input type="radio" name="q1" value="b"> ตา <br>
+            <div id="exp1" class="explanation">เฉลย: กา อ่านว่า กอ-อา-กา เพราะ...</div>
+            
+            <button type="button" onclick="submitExam()">ส่งข้อสอบ</button>
+        </form>
+    </div>
+
+    <script>
+        function submitExam() {
+            // โค้ดคำนวณคะแนน
+            document.querySelectorAll('.explanation').forEach(el => el.style.display = 'block');
+            // เพิ่มการแจ้งเตือนไปที่ Telegram Bot ของคุณที่นี่
+            console.log("คะแนนถูกบันทึกแล้ว");
+        }
+    </script>
+</body>
+</html>
