@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>แบบฝึกหัด บทที่ ๒ - มานะ มานี ชั้นประถมศึกษาปีที่ ๑</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600;700&display=swap');
+
+        * {
+            box-sizing: border-box;
+            font-family: 'Sarabun', sans-serif;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+            color: #1a1a1a;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+
+        /* แถบหัวกระดาษด้านบน (Header Navigation Bar) */
+        .header-bar {
+            width: 100%;
+            max-width: 800px;
+            background: linear-gradient(to bottom, #ffb366, #ffd9b3);
+            padding: 12px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #e68a00;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .avatar-box {
+            width: 55px;
+            height: 55px;
+            background-color: #fff;
+            border-radius: 50%;
+            border: 2px solid #e68a00;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .avatar-box svg {
+            width: 85%;
+            height: 85%;
+        }
+
+        .lesson-title {
+            background-color: rgba(255, 255, 255, 0.5);
+            padding: 6px 16px;
+            border-radius: 6px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #804c00;
+            border: 1px solid rgba(255, 255, 255, 0.7);
+        }
+
+        .header-right {
+            font-size: 18px;
+            font-weight: 600;
+            color: #804c00;
+            display: flex;
+            gap: 20px;
+        }
+
+        /* พื้นที่เนื้อหาหลัก (Main Content Container) */
+        .container {
+            width: 100%;
+            max-width: 800px;
+            padding: 40px 50px;
+            position: relative;
+            min-height: calc(100vh - 140px);
+        }
+
+        /* โลโก้รูปไข่ "แบบฝึก" ตรงกลาง */
+        .badge-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 45px;
+        }
+
+        .badge-main {
+            border: 3px solid #ff5555;
+            border-radius: 40px;
+            padding: 6px 55px;
+            position: relative;
+            background-color: #fff;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .badge-text {
+            font-size: 38px;
+            font-weight: 700;
+            color: #2b2b2b;
+            text-align: center;
+        }
+
+        .badge-flower {
+            position: absolute;
+            top: -24px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 26px;
+        }
+
+        /* ปุ่มคำสั่ง "ให้อ่านว่า..." */
+        .instruction-bubble {
+            background-color: #ffb84d;
+            color: #4d2600;
+            display: inline-block;
+            padding: 10px 28px;
+            border-radius: 20px;
+            font-size: 26px;
+            font-weight: 600;
+            margin-bottom: 22px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.08);
+            border: 1px solid #ffa31a;
+        }
+
+        .instruction-bubble:hover {
+            transform: scale(1.03);
+            background-color: #ffa31a;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.12);
+        }
+
+        .instruction-bubble:active {
+            transform: scale(0.98);
+        }
+
+        /* การจัดวางกลุ่มคำสระ อู */
+        .word-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            width: 100%;
+            max-width: 550px;
+            margin-left: 100px;
+            margin-bottom: 45px;
+        }
+
+        .word-item {
+            font-size: 36px;
+            font-weight: 600;
+            color: #000000;
+            cursor: pointer;
+            padding: 4px 16px;
+            border-radius: 10px;
+            transition: all 0.2s;
+            display: inline-block;
+            width: fit-content;
+            text-align: center;
+        }
+
+        .word-item:hover {
+            background-color: #fff2e6;
+            color: #cc6600;
+            transform: scale(1.15);
+        }
+
+        /* โครงสร้างกลุ่มคำและประโยคด้านล่าง */
+        .reading-section {
+            width: 100%;
+            max-width: 550px;
+            margin-left: 100px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        .reading-line {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            align-items: center;
+            cursor: pointer;
+            padding: 6px 16px;
+            border-radius: 10px;
+            transition: all 0.2s;
+        }
+
+        .reading-line:hover {
+            background-color: #fff9f2;
+            transform: translateX(8px);
+        }
+
+        .reading-cell {
+            font-size: 36px;
+            font-weight: 600;
+            color: #000000;
+        }
+
+        .reading-cell.dash {
+            color: #b3b3b3;
+            font-weight: 400;
+            padding-left: 10px;
+        }
+
+        /* เอฟเฟกต์สีส้มไฮไลท์ขณะที่ระบบกำลังเล่นเสียงอ่าน */
+        .playing {
+            animation: pulse-highlight 0.5s infinite alternate;
+            color: #ff6600 !important;
+            background-color: #fff0e6 !important;
+            box-shadow: 0 0 10px rgba(255, 102, 0, 0.2);
+        }
+
+        @keyframes pulse-highlight {
+            from { transform: scale(1); }
+            to { transform: scale(1.04); }
+        }
+
+        /* รูปปูนาและรูดินแบบเวกเตอร์ด้านขวา */
+        .artwork-crab {
+            position: absolute;
+            right: 40px;
+            top: 52%;
+            transform: translateY(-5%);
+            width: 200px;
+            text-align: center;
+            pointer-events: none;
+        }
+
+        .artwork-crab svg {
+            width: 100%;
+            height: auto;
+            filter: drop-shadow(0px 6px 12px rgba(0,0,0,0.08));
+        }
+
+        /* แถบท้ายกระดาษแสดงเลขหน้า */
+        .footer-bar {
+            width: 100%;
+            max-width: 800px;
+            margin-top: 60px;
+            padding: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 22px;
+            color: #444444;
+            border-top: 1px solid #eeeeee;
+            font-weight: 600;
+        }
+
+        /* กล่องแจ้งเตือนสถานะเสียงด้านล่างหน้าจอ */
+        .audio-toast {
+            position: fixed;
+            bottom: 40px;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            padding: 12px 28px;
+            border-radius: 25px;
+            font-size: 18px;
+            display: none;
+            z-index: 1000;
+            pointer-events: none;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header-bar">
+        <div class="header-left">
+            <div class="avatar-box">
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="50" cy="45" r="20" fill="#fcd3ca"/>
+                    <path d="M50,12 C38,12 32,22 32,34 C34,32 38,32 40,34 C36,40 42,48 48,46 C46,52 52,54 54,52 C58,54 62,50 60,46 C66,48 70,40 66,34 C68,32 70,32 72,34 C72,22 66,12 50,12 Z" fill="#261a10"/>
+                    <path d="M50,65 C35,65 20,75 20,90 L80,90 C80,75 65,65 50,65 Z" fill="#3366cc"/>
+                </svg>
+            </div>
+            <div class="lesson-title">บทที่ ๒</div>
+        </div>
+        <div class="header-right">
+            <span>มานะ มานี</span>
+            <span>ชั้นประถมศึกษาปีที่ ๑</span>
+        </div>
+    </div>
+
+    <div class="container">
+        
+        <div class="badge-container">
+            <div class="badge-main">
+                <div class="badge-flower">🌻🍂</div>
+                <div class="badge-text">แบบฝึก</div>
+            </div>
+        </div>
+
+        <div class="instruction-bubble" onclick="playAudio('ให้อ่านว่า รอ อู รู', this)">ให้อ่านว่า ร - อู - รู</div>
+        <div class="word-row">
+            <div class="word-item" onclick="playAudio('รู', this)">รู</div>
+            <div class="word-item" onclick="playAudio('ปู', this)">ปู</div>
+            <div class="word-item" onclick="playAudio('ดู', this)">ดู</div>
+            <div class="word-item" onclick="playAudio('งู', this)">งู</div>
+        </div>
+
+        <div class="instruction-bubble" onclick="playAudio('ให้อ่านว่า ฟอ อู ฟู', this)">ให้อ่านว่า ฟ - อู - ฟู</div>
+        <div class="word-row">
+            <div class="word-item" onclick="playAudio('ฟู', this)">ฟู</div>
+            <div class="word-item" onclick="playAudio('รู', this)">รู</div>
+            <div class="word-item" onclick="playAudio('หู', this)">หู</div>
+            <div></div>
+        </div>
+
+        <div class="reading-section">
+            <div class="reading-line" onclick="playAudio('มานี ดู ปู', this)">
+                <div class="reading-cell">มานี</div>
+                <div class="reading-cell">ดู</div>
+                <div class="reading-cell">ปู</div>
+                <div class="reading-cell dash">-</div>
+            </div>
+            <div class="reading-line" onclick="playAudio('มานะ ดู งู', this)">
+                <div class="reading-cell">มานะ</div>
+                <div class="reading-cell">ดู</div>
+                <div class="reading-cell">งู</div>
+                <div class="reading-cell dash">-</div>
+            </div>
+            <div class="reading-line" onclick="playAudio('ปู นา มี รู', this)">
+                <div class="reading-cell">ปูนา</div>
+                <div class="reading-cell">มี</div>
+                <div class="reading-cell">รู</div>
+                <div class="reading-cell dash">-</div>
+            </div>
+            <div class="reading-line" onclick="playAudio('ตา ดู ปู นา', this)">
+                <div class="reading-cell">ตา</div>
+                <div class="reading-cell">ดู</div>
+                <div class="reading-cell">ปู</div>
+                <div class="reading-cell">นา</div>
+            </div>
+            <div class="reading-line" onclick="playAudio('งู ดู ปู นา', this)">
+                <div class="reading-cell">งู</div>
+                <div class="reading-cell">ดู</div>
+                <div class="reading-cell">ปู</div>
+                <div class="reading-cell">นา</div>
+            </div>
+            <div class="reading-line" onclick="playAudio('ตา มี รู หู', this)">
+                <div class="reading-cell">ตา</div>
+                <div class="reading-cell">มี</div>
+                <div class="reading-cell">รู</div>
+                <div class="reading-cell">หู</div>
+            </div>
+            <div class="reading-line" onclick="playAudio('มานะ มา รู นา', this)">
+                <div class="reading-cell">มานะ</div>
+                <div class="reading-cell">มา</div>
+                <div class="reading-cell">รู</div>
+                <div class="reading-cell">นา</div>
+            </div>
+        </div>
+
+        <div class="artwork-crab">
+            <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                <ellipse cx="100" cy="150" rx="80" ry="25" fill="#d2b48c" opacity="0.9"/>
+                <ellipse cx="100" cy="150" rx="35" ry="12" fill="#5c4033"/>
+                <path d="M40,140 Q30,110 25,120 Q35,115 45,142 Z" fill="#556b2f"/>
+                <path d="M150,145 Q165,120 170,130 Q155,135 148,148 Z" fill="#6b8e23"/>
+                <ellipse cx="100" cy="130" rx="30" ry="18" fill="#8b0000"/>
+                <circle cx="90" cy="110" r="4" fill="#fff"/>
+                <circle cx="90" cy="110" r="2" fill="#000"/>
+                <circle cx="110" cy="110" r="4" fill="#fff"/>
+                <circle cx="110" cy="110" r="2" fill="#000"/>
+                <line x1="90" y1="114" x2="90" y2="122" stroke="#8b0000" stroke-width="3"/>
+                <line x1="110" y1="114" x2="110" y2="122" stroke="#8b0000" stroke-width="3"/>
+                <path d="M65,125 Q50,105 70,110 Q75,120 68,126 Z" fill="#a52a2a"/>
+                <path d="M135,125 Q150,105 130,110 Q125,120 132,126 Z" fill="#a52a2a"/>
+                <path d="M65,135 Q50,135 55,142" stroke="#8b0000" stroke-width="4" fill="none"/>
+                <path d="M135,135 Q150,135 145,142" stroke="#8b0000" stroke-width="4" fill="none"/>
+            </svg>
+        </div>
+
+    </div>
+
+    <div class="footer-bar">
+        <div>๓</div>
+        <div>หน้า สาม</div>
+    </div>
+
+    <div class="audio-toast" id="audioToast">กำลังเล่นเสียงอ่าน...</div>
+
+    <script>
+        // ระบบเสียงอัจฉริยะสำหรับการเรียนรู้ของเด็กประถม
+        function playAudio(text, element) {
+            document.querySelectorAll('.playing').forEach(el => el.classList.remove('playing'));
+            element.classList.add('playing');
+            
+            const toast = document.getElementById('audioToast');
+            toast.textContent = `🔊 กำลังอ่าน: "${text.replace(/-/g, '')}"`;
+            toast.style.display = 'block';
+
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                let speechText = text.replace(/ - /g, ' ');
+
+                const utterance = new SpeechSynthesisUtterance(speechText);
+                utterance.lang = 'th-TH';
+                
+                // ความเร็วและระดับเสียงที่ปรับให้เหมาะกับบทเรียนประถม 1
+                utterance.rate = 0.82;   
+                utterance.pitch = 1.05;  
+
+                const voices = window.speechSynthesis.getVoices();
+                const premiumVoice = voices.find(v => v.lang === 'th-TH' && (v.name.includes('Google') || v.name.includes('Premium') || v.name.includes('Natural')));
+                if (premiumVoice) {
+                    utterance.voice = premiumVoice;
+                }
+
+                utterance.onend = function() {
+                    element.classList.remove('playing');
+                    toast.style.display = 'none';
+                };
+
+                utterance.onerror = function() {
+                    element.classList.remove('playing');
+                    toast.style.display = 'none';
+                };
+
+                window.speechSynthesis.speak(utterance);
+            } else {
+                setTimeout(() => {
+                    element.classList.remove('playing');
+                    toast.style.display = 'none';
+                }, 1500);
+            }
+        }
+
+        if ('speechSynthesis' in window) {
+            window.speechSynthesis.getVoices();
+        }
+    </script>
+</body>
+</html>
